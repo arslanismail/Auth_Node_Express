@@ -6,16 +6,16 @@ const mongoose=require('mongoose');
 
     name:{
         type:String,
-        required:True
+        required:true
     },
     
     email:{
         type:String,
-        required:True
+        required:true
     },
     password:{
         type:String,
-        required:True
+        required:true
     },
     date:{
         type:Date,

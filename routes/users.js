@@ -1,5 +1,9 @@
 const express=require('express');
 const router=express.Router();
+const bcrypt= require('bcryptjs');
+
+
+const User =require('../models/User');
 
 //  Login
 router.get('/login',(req,res)=>{
@@ -42,7 +46,28 @@ router.post('/register',(req,res)=>{
             password2
         })
     }else{
-        res.send('pass')
+        const createUser=async ()=>{
+            const result=await User.findOne({email:email})
+            if(result){
+                errors.push({msg:'Email is already registered'})
+                res.render('register',{
+                    errors,
+                    name,
+                    email,
+                    password,
+                    password2
+                })
+            }else{
+                const newUser=new User({
+                    name,
+                    email,
+                    password
+                })
+                console.log(newUser);
+                res.send(newUser);
+            }
+        }
+        // User.findOne({email:email}).then()
     }
 })
 
