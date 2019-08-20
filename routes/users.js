@@ -63,10 +63,16 @@ router.post('/register',(req,res)=>{
                     email,
                     password
                 })
-                console.log(newUser);
-                res.send(newUser);
+                try{
+                const saveUser2db=await newUser.save();
+                res.redirect('/users/login');
+                }catch(err){
+                    console.log(err);
+                }
+
             }
         }
+        createUser();
         // User.findOne({email:email}).then()
     }
 })
